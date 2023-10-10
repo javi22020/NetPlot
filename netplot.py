@@ -5,13 +5,14 @@ import matplotlib.pyplot as plt
 
 lista_neuronas = [12, 16, 16, 4]
 
+
 lista_pesos = []
 for i in range(len(lista_neuronas) - 1):
     lista_pesos.append(np.random.randn(lista_neuronas[i + 1], lista_neuronas[i]))
 
 def crear_grafo(lista_neuronas: list, lista_pesos: list):
     red = pd.Dot("Red", graph_type='digraph')
-    red.set_graph_defaults(rankdir="LR", lwidth=50)
+    red.set_graph_defaults(rankdir="LR", lwidth="50", margin="1", ratio="1.5")
     for num_capa in range(len(lista_neuronas)):
         s_grafo = pd.Subgraph(graph_name="Capa" + str(num_capa))
         for neurona in range(lista_neuronas[num_capa]):
@@ -35,4 +36,4 @@ red_dot = crear_grafo(lista_neuronas=lista_neuronas, lista_pesos=lista_pesos)
 
 open("temp.gv", "w").write(str(red_dot))
 
-red_dot.write_png("output.png")
+red_dot.write_svg("output.svg")
